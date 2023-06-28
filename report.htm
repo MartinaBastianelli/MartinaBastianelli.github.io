@@ -15,47 +15,46 @@ Firstly, we kept in mind for each query the Wikidata prefixes, that are necessar
 After defining the title, the subtitle and the general introduction of our story, we started with Melody’s “Add text”, in which we simply wrote a paragraph in order to present the 27 Club’s cultural phenomenon and our particular focus, and we added a link to Wikipedia’s 27 Club page in case someone wants to have a more detailed and complete overview about it. 
 Later, we proceeded with the “Add count” button and we built a query that could let us know how many members the 27 Club includes: in the SELECT clause we listed the variables we wanted returned, basically the number of members, and in the WHERE clause we simply added the related restrictions, that are members of the 27 Club (Img. 1). </p>
 
-<img src="Count.png" width="200" height="200">
+<img src="Count.png" width="300" height="300">
 
 <p> Then we created two maps of the members’ origins and deaths by inserting in the SELECT DISTINCT clause the latitude, longitude, and the country of the artists involved and by specifying in the WHERE clause that we were interested in members of the 27 Club, in their country of citizenship (wdt:P27) or place of death (wdt:P20)  and in the coordinates of them (wdt:P625). 
 The SERVICE clause is a specific service of Wikidata that specifies the language to use (Img. 2 and 3).  We also tried to add a filter to the first map, in order to restrict the research to the specific cities in which the members were born, by specifying in the WHERE clause that the filter related to the country of citizenship should show the particular place of birth (wdt:P19) 
 of the members (the FILTER clause is obviously a specific service of Wikidata that is necessary to introduce a filter to a query), but the query works on Wikidata and not on Melody (Img. 4). </p>
 
-<img src="Origin map.png" width="200" height="200">
-<img src="Death map query.png" width="200" height="200">
-<img src="Filter query.png" width="200" height="200">
+<img src="Origin map.png" width="300" height="300">
+<img src="death map query.png" width="300" height="300">
+<img src="Filter query.png" width="300" height="300">
 
 <p>Later, we built two tables in order to show some of their personal details. The first one conveys the members’ birth and death year (wdt:P569; wdt:P570), birth and death place (wdt:P19; wdt:P20) and a picture of each one (wdt:P18) – all these variables are listed in the SELECT DISTINCT clause and identified with their codes in the WHERE clause (Img. 5). 
 The second table basically explains the causes of their deaths (wdt:P509), including their death date again (wdt:P570), which are ordered depending on the year thanks to the ORDER BY clause. In this case, the SERVICE clause serves in order to obtain results in a human-readable form (Img. 6). </p>
 
-<img src="details table query.png" width="200" height="200">
-<img src="cause death table query.png" width="200" height="200">
+<img src="details table query.png" width="300" height="300">
+<img src="Cause death table query.png" width="300" height="300">
 
 <p>We proceeded then with two line charts, a bar chart and a doughnut chart to indicate when they started and ended their careers (wdt:P2031; wdt:P2032), how many awards they received during it (wdt:P166), and when they died (wdt:P570), by counting them and always specifying their belonging to the 27 Club in the WHERE clause. We also put  the results in descending order and grouped by labels  with the GROUP BY and ORDER BY clauses (Img 7; Img 8; Img 9; Img. 10). </p>
 
-<img src="Start career query.png" width="200" height="200">
-<img src="end career query.png" width="200" height="200">
-<img src="awards received query.png" width="200" height="200">
-<img src="death year query.png" width="200" height="200">
+<img src="Start career query.png" width="300" height="300">
+<img src="end career query.png" width="300" height="300">
+<img src="awards received query.png" width="300" height="300">
+<img src="death year query.png" width="300" height="300">
 
 <p>We also created a textsearch in which it is possible to look for singers (not bands) and know the genre he/she plays (wdt:P136), his/her type of voice (wdt:P412), his/her date of birth (wdt:P569), the date of death, if any  (wdt:P570) and the band he/she is part of (wdt:P463) - if he/she is actually part of a band. Indeed, we added these two last properties as optional elements because here you could search for all singers and not for only the ones within the “27 Group”: they could be still alive and not all singers could be members of a band. 
 You could also understand if the singer you searched for is part of the “27 Group” by just observing the year of death and the year of birth. Basically, we specified in the WHERE clause that the singer must be a human (wd:Q5) – if not, Wikidata will provide us everything related to that artist – and all the variables we wanted with their identifier codes (Img. 11). </p>
 
-<img src="searchtext query.png" width="200" height="200">
+<img src="searchtext query.png" width="300" height="300">
 
 <p>We also added two actions to different variables of the textsearch. The first one helps to understand who the other members of an eventual band are, apart from the singer in question. To do so, we added the button “band’s members” (wdt:P527) to “band” (Img.12).</p>
 
-<img src="band members query.png" width="200" height="200">
+<img src="band members query.png" width="300" height="300">
 
 <p>On the other hand, we added the button “albums & songs” to “singer” in order to isolate the most notable works (wdt:P800) - in this case the albums – of the singers and the songs in those albums, if found. Indeed, we put the latter element in the “optional” section because we saw that if we searched for it in the WHERE clause, the albums that could be found for some singers without the songs disappeared with the addition of the “song” variable, while in this way, at least the album results could be maintained. This is maybe due to the sparse data of knowledge graphs where such detailed information could not be found. In addition, we also inserted the ORDER BY clause so as to establish an alphabetical order in the results of the album labels. (Img. 13)</p>
 
-<img src="albums and songs query.png" width="200" height="200">
+<img src="albums and songs query.png" width="300" height="300">
 
 <p>All in all, the main challenge we encountered was basically the fact that, as it is possible to see in the Melody story, Wikidata has different information for each query and sometimes it gives different results that do not match with one another in the queries, even if they are correct. For example, the counter says that the members of the 27 Club are 26, while the map shows the origins of 32 people and the two tables provide information for 20 artists more or less. Moreover, some of the queries do not work on Melody, but they are correct since they work on Wikidata and actually give back correct results, like the filter of the first map or the two line charts. Finally, in some cases, since knowledge graphs can have limited information, it is possible to have results only if the OPTIONAL clause is added to the query, for example in the Action’s query: without this clause, for some singers like Janis Joplin there were no results as far as the albums and songs are concerned, whereas the OPTIONAL allows to see some of them. </p>
 
 
-
-
+<p> Bastianelli Martina & Fratti Veronica </p>
 
 
 
